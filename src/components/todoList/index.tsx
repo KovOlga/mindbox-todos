@@ -11,7 +11,6 @@ export default function TodoList({
 }): ReactElement {
   return (
     <>
-      {todos.length === 0 && <p>All completed</p>}
       {todos.length > 0 && (
         <List>
           {todos.map((item) => {

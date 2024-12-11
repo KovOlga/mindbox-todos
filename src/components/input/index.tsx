@@ -7,7 +7,9 @@ export default function Input({ addTodo }: { addTodo: (todo: ITodo) => void }): 
   const [value, setValue] = useState('');
   const submitNewToDo = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    addTodo({ complete: false, name: value, id: uuidv4() });
+    if (value) {
+      addTodo({ complete: false, name: value, id: uuidv4() });
+    }
   };
   return (
     <form onSubmit={submitNewToDo}>
