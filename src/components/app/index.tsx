@@ -11,6 +11,18 @@ function App(): ReactElement {
   const [todos, setTodos] = useState(mockTodos);
   const [completed, setCompleted] = useState(0);
   const [filterBtn, setFilterBtn] = useState<ControlBtns>(ControlBtns.ALL);
+
+  useEffect(() => {
+    const completedNum = todos.reduce((accumulateValue, currentItem) => {
+      if (!currentItem.complete) {
+        return accumulateValue + 1;
+      } else {
+        return accumulateValue;
+      }
+    }, 0);
+    setCompleted(completedNum);
+  }, [todos]);
+
   const markComplete = (id: string): void => {
     const ind = todos.findIndex((item) => item.id === id);
     const nextCounters = todos.map((item, i) => {
@@ -23,16 +35,21 @@ function App(): ReactElement {
     setTodos(nextCounters);
   };
 
-  useEffect(() => {
-    const completedNum = todos.reduce((accumulateValue, currentItem) => {
-      if (!currentItem.complete) {
-        return accumulateValue + 1;
-      } else {
-        return accumulateValue;
+  const getFilteredTodos = (): ITodo[] => {
+    return todos.filter((item) => {
+      switch (filterBtn) {
+        case ControlBtns.ALL: {
+          return item;
+        }
+        case ControlBtns.ACTIVE: {
+          return !item.complete;
+        }
+        case ControlBtns.COMPLETED: {
+          return item.complete;
+        }
       }
-    }, 0);
-    setCompleted(completedNum);
-  }, [todos]);
+    });
+  };
 
   const clearCompeted = (): void => {
     const activeTodos = todos.filter((item) => !item.complete);
@@ -77,22 +94,7 @@ function App(): ReactElement {
             Clear completed
           </Button>
         </div>
-        <TodoList
-          markComplete={markComplete}
-          todos={todos.filter((item) => {
-            switch (filterBtn) {
-              case ControlBtns.ALL: {
-                return item;
-              }
-              case ControlBtns.ACTIVE: {
-                return !item.complete;
-              }
-              case ControlBtns.COMPLETED: {
-                return item.complete;
-              }
-            }
-          })}
-        />
+        <TodoList markComplete={markComplete} todos={getFilteredTodos()} />
       </main>
     </div>
   );
