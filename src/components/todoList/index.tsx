@@ -7,7 +7,7 @@ export default function TodoList({
   markComplete,
 }: {
   todos: ITodo[];
-  markComplete: (id: number) => void;
+  markComplete: (id: string) => void;
 }): ReactElement {
   return (
     <>
@@ -16,8 +16,8 @@ export default function TodoList({
         <List>
           {todos.map((item) => {
             return (
-              <>
-                <ListItem disablePadding key={item.id}>
+              <div key={item.id}>
+                <ListItem disablePadding>
                   <ListItemButton
                     onClick={() => {
                       markComplete(item.id);
@@ -27,11 +27,11 @@ export default function TodoList({
                     <ListItemIcon>
                       <Checkbox edge="start" color="success" disableRipple checked={item.complete} tabIndex={-1} />
                     </ListItemIcon>
-                    <ListItemText id={item.id.toString()} primary={item.name} />
+                    <ListItemText id={item.id} primary={item.name} />
                   </ListItemButton>
                 </ListItem>
                 <Divider />
-              </>
+              </div>
             );
           })}
         </List>

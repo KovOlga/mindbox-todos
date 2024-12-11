@@ -11,7 +11,7 @@ function App(): ReactElement {
   const [todos, setTodos] = useState(mockTodos);
   const [completed, setCompleted] = useState(0);
   const [filterBtn, setFilterBtn] = useState<ControlBtns>(ControlBtns.ALL);
-  const markComplete = (id: number): void => {
+  const markComplete = (id: string): void => {
     const ind = todos.findIndex((item) => item.id === id);
     const nextCounters = todos.map((item, i) => {
       if (i === ind) {

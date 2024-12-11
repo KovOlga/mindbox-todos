@@ -1,23 +1,24 @@
 import { ITodo } from '../types';
+import { v4 as uuidv4 } from 'uuid';
 
 export const mockTodos: ITodo[] = [
   {
-    id: 1,
+    id: uuidv4(),
     name: 'Buy Flowers',
     complete: false,
   },
   {
-    id: 2,
+    id: uuidv4(),
     name: 'Get Shoes',
     complete: false,
   },
   {
-    id: 3,
+    id: uuidv4(),
     name: 'Collect Tickets',
     complete: false,
   },
   {
-    id: 4,
+    id: uuidv4(),
     name: 'Call Joe',
     complete: true,
   },
