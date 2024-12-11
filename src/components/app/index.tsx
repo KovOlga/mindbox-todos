@@ -1,13 +1,17 @@
 import { ReactElement } from 'react';
 import Header from '../header';
+import TodosList from '../todosList';
 import './styles.css';
-import Form from '../form';
+import Input from '../input';
 
 function App(): ReactElement {
   return (
-    <div className="App">
+    <div className="app">
       <Header />
-      <Form />
+      <main className="wrapper">
+        <Input />
+        <TodosList />
+      </main>
     </div>
   );
 }
