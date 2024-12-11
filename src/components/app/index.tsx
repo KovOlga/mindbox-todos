@@ -34,6 +34,11 @@ function App(): ReactElement {
     setCompleted(completedNum);
   }, [todos]);
 
+  const clearCompeted = (): void => {
+    const activeTodos = todos.filter((item) => !item.complete);
+    setTodos(activeTodos);
+  };
+
   return (
     <div className="app">
       <Header />
@@ -80,7 +85,7 @@ function App(): ReactElement {
               Completed
             </Button>
           </ButtonGroup>
-          <Button variant="outlined" size="small">
+          <Button onClick={clearCompeted} variant="outlined" size="small">
             Clear completed
           </Button>
         </div>

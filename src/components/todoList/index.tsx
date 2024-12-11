@@ -10,27 +10,32 @@ export default function TodoList({
   markComplete: (id: number) => void;
 }): ReactElement {
   return (
-    <List>
-      {todos.map((item) => {
-        return (
-          <>
-            <ListItem disablePadding key={item.id}>
-              <ListItemButton
-                onClick={() => {
-                  markComplete(item.id);
-                }}
-                dense
-              >
-                <ListItemIcon>
-                  <Checkbox edge="start" color="success" disableRipple checked={item.complete} tabIndex={-1} />
-                </ListItemIcon>
-                <ListItemText id={item.id.toString()} primary={item.name} />
-              </ListItemButton>
-            </ListItem>
-            <Divider />
-          </>
-        );
-      })}
-    </List>
+    <>
+      {todos.length === 0 && 'All completed'}
+      {todos.length > 0 && (
+        <List>
+          {todos.map((item) => {
+            return (
+              <>
+                <ListItem disablePadding key={item.id}>
+                  <ListItemButton
+                    onClick={() => {
+                      markComplete(item.id);
+                    }}
+                    dense
+                  >
+                    <ListItemIcon>
+                      <Checkbox edge="start" color="success" disableRipple checked={item.complete} tabIndex={-1} />
+                    </ListItemIcon>
+                    <ListItemText id={item.id.toString()} primary={item.name} />
+                  </ListItemButton>
+                </ListItem>
+                <Divider />
+              </>
+            );
+          })}
+        </List>
+      )}
+    </>
   );
 }
