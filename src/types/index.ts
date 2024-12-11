@@ -3,3 +3,9 @@ export interface ITodo {
   name: string;
   complete: boolean;
 }
+
+export enum ControlBtns {
+  ALL = 'all',
+  ACTIVE = 'active',
+  COMPLETED = 'completed',
+}

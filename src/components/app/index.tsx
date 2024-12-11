@@ -5,12 +5,12 @@ import Input from '../input';
 import TodoList from '../todoList';
 import { Button, ButtonGroup, Chip } from '@mui/material';
 import { mockTodos } from '../../utils/mock';
+import { ControlBtns } from '../../types';
 
 function App(): ReactElement {
   const [todos, setTodos] = useState(mockTodos);
-  const [filteredTodos] = useState(mockTodos);
   const [completed, setCompleted] = useState(0);
-  // setFilteredTodos
+  const [filterBtn, setFilterBtn] = useState<ControlBtns>(ControlBtns.ALL);
   const markComplete = (id: number): void => {
     const ind = todos.findIndex((item) => item.id === id);
     const nextCounters = todos.map((item, i) => {
@@ -39,15 +39,46 @@ function App(): ReactElement {
       <Header />
       <main className="wrapper">
         <Input />
-        <TodoList markComplete={markComplete} todos={filteredTodos} />
+        <TodoList
+          markComplete={markComplete}
+          todos={todos.filter((item) => {
+            switch (filterBtn) {
+              case ControlBtns.ALL: {
+                return item;
+              }
+              case ControlBtns.ACTIVE: {
+                return !item.complete;
+              }
+              case ControlBtns.COMPLETED: {
+                return item.complete;
+              }
+            }
+          })}
+        />
         <div className="controls">
           <Chip label={`${completed} left`} size="small" variant="outlined" />
           <ButtonGroup variant="outlined" aria-label="Basic button group">
-            <Button size="small" variant="contained">
+            <Button
+              size="small"
+              variant={filterBtn === ControlBtns.ALL ? 'contained' : 'outlined'}
+              onClick={() => setFilterBtn(ControlBtns.ALL)}
+            >
               All
             </Button>
-            <Button size="small">Active</Button>
-            <Button size="small">Completed</Button>
+            <Button
+              size="small"
+              variant={filterBtn === ControlBtns.ACTIVE ? 'contained' : 'outlined'}
+              onClick={() => setFilterBtn(ControlBtns.ACTIVE)}
+            >
+              Active
+            </Button>
+            <Button
+              size="small"
+              variant={filterBtn === ControlBtns.COMPLETED ? 'contained' : 'outlined'}
+              onClick={() => setFilterBtn(ControlBtns.COMPLETED)}
+            >
+              Completed
+            </Button>
           </ButtonGroup>
           <Button variant="outlined" size="small">
             Clear completed
