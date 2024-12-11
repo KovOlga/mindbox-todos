@@ -5,7 +5,7 @@ import Input from '../input';
 import TodoList from '../todoList';
 import { Button, ButtonGroup, Chip } from '@mui/material';
 import { mockTodos } from '../../utils/mock';
-import { ControlBtns } from '../../types';
+import { ControlBtns, ITodo } from '../../types';
 
 function App(): ReactElement {
   const [todos, setTodos] = useState(mockTodos);
@@ -39,27 +39,15 @@ function App(): ReactElement {
     setTodos(activeTodos);
   };
 
+  const addTodo = (todo: ITodo): void => {
+    setTodos([todo, ...todos]);
+  };
+
   return (
     <div className="app">
       <Header />
       <main className="wrapper">
-        <Input />
-        <TodoList
-          markComplete={markComplete}
-          todos={todos.filter((item) => {
-            switch (filterBtn) {
-              case ControlBtns.ALL: {
-                return item;
-              }
-              case ControlBtns.ACTIVE: {
-                return !item.complete;
-              }
-              case ControlBtns.COMPLETED: {
-                return item.complete;
-              }
-            }
-          })}
-        />
+        <Input addTodo={addTodo} />
         <div className="controls">
           <Chip label={`${completed} left`} size="small" variant="outlined" />
           <ButtonGroup variant="outlined" aria-label="Basic button group">
@@ -89,6 +77,22 @@ function App(): ReactElement {
             Clear completed
           </Button>
         </div>
+        <TodoList
+          markComplete={markComplete}
+          todos={todos.filter((item) => {
+            switch (filterBtn) {
+              case ControlBtns.ALL: {
+                return item;
+              }
+              case ControlBtns.ACTIVE: {
+                return !item.complete;
+              }
+              case ControlBtns.COMPLETED: {
+                return item.complete;
+              }
+            }
+          })}
+        />
       </main>
     </div>
   );

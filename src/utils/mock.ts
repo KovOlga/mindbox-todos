@@ -21,9 +21,4 @@ export const mockTodos: ITodo[] = [
     name: 'Call Joe',
     complete: true,
   },
-  {
-    id: 5,
-    name: 'd',
-    complete: false,
-  },
 ];
