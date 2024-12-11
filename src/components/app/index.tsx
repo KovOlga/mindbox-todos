@@ -1,10 +1,13 @@
+import { ReactElement } from 'react';
+import Header from '../header';
 import './styles.css';
+import Form from '../form';
 
-function App() {
+function App(): ReactElement {
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
+      <Header />
+      <Form />
     </div>
   );
 }
