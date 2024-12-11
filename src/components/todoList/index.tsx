@@ -1,16 +1,26 @@
 import { ReactElement } from 'react';
-import { useAppSelector } from '../../store/hooks';
 import { Checkbox, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { ITodo } from '../../types';
 
-export default function TodoList(): ReactElement {
-  const todos = useAppSelector((state) => state.todos.todos);
+export default function TodoList({
+  todos,
+  markComplete,
+}: {
+  todos: ITodo[];
+  markComplete: (id: number) => void;
+}): ReactElement {
   return (
     <List>
       {todos.map((item) => {
         return (
           <>
             <ListItem disablePadding key={item.id}>
-              <ListItemButton dense>
+              <ListItemButton
+                onClick={() => {
+                  markComplete(item.id);
+                }}
+                dense
+              >
                 <ListItemIcon>
                   <Checkbox edge="start" color="success" disableRipple checked={item.complete} tabIndex={-1} />
                 </ListItemIcon>
