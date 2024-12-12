@@ -29,3 +29,26 @@ it('Кнопка удаления выполненных задач работа
   const listItemsCleared = getAllByTestId(container, 'list-item');
   expect(listItemsCleared.length).toBe(3);
 });
+
+it('Фильтры работают верно', () => {
+  const { container } = render(<Form />);
+
+  const filterAllBtn = getByTestId(container, 'btn-all');
+  const filterActiveBtn = getByTestId(container, 'btn-active');
+  const filterCompletedBtn = getByTestId(container, 'btn-completed');
+
+  fireEvent.click(filterActiveBtn);
+
+  const listItemsActive = getAllByTestId(container, 'list-item');
+  expect(listItemsActive.length).toBe(3);
+
+  fireEvent.click(filterCompletedBtn);
+
+  const listItemsCompleted = getAllByTestId(container, 'list-item');
+  expect(listItemsCompleted.length).toBe(1);
+
+  fireEvent.click(filterAllBtn);
+
+  const listItemsAll = getAllByTestId(container, 'list-item');
+  expect(listItemsAll.length).toBe(4);
+});
