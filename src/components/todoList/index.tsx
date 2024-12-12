@@ -13,11 +13,12 @@ export default function TodoList({
     <>
       {todos.length > 0 && (
         <List data-testid="list">
-          {todos.map((item) => {
+          {todos.map((item, index) => {
             return (
               <div key={item.id}>
                 <ListItem data-testid="list-item" disablePadding>
                   <ListItemButton
+                    data-testid={`list-item-button-${index}`}
                     onClick={() => {
                       markComplete(item.id);
                     }}
