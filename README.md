@@ -8,7 +8,7 @@
 
 `npm run start`
 
-## Установка и запуска через bash:
+## Установка и запуск через bash:
 
 ```bash
 npm i && npm run start
