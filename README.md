@@ -18,6 +18,11 @@ npm i && npm run start
 
 ## Тестирование:
 
+Исходники тестов лежат в:
+
+- src\tests\index.test.tsx
+- cypress\e2e\test.spec.cy.ts
+
 ### Cypress
 
 Для запуска Cypress тестов необходимо ввести команды в разных окнах терминала
