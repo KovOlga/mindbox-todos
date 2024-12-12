@@ -8,7 +8,13 @@
 
 `npm run start`
 
-Приложение запуститься по адресу [http://localhost:3000](http://localhost:3000)
+## Установка и запуска через bash:
+
+```bash
+npm i && npm run start
+```
+
+Приложение запустится по адресу [http://localhost:3000](http://localhost:3000)
 
 ## Тестирование:
 
