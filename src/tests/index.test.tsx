@@ -1,5 +1,5 @@
 import { render, getByTestId, fireEvent, getAllByTestId } from '@testing-library/react';
-import Form from '.';
+import Form from '../components/form';
 
 it('Счетчик оставшихся задач работает верно', () => {
   const { container } = render(<Form />);

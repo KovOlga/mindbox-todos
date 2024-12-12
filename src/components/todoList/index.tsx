@@ -27,7 +27,7 @@ export default function TodoList({
                     <ListItemIcon>
                       <Checkbox edge="start" color="success" disableRipple checked={item.complete} tabIndex={-1} />
                     </ListItemIcon>
-                    <ListItemText id={item.id} primary={item.name} />
+                    <ListItemText data-testid="list-item-text" id={item.id} primary={item.name} />
                   </ListItemButton>
                 </ListItem>
                 <Divider />
