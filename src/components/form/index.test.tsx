@@ -52,3 +52,35 @@ it('Фильтры работают верно', () => {
   const listItemsAll = getAllByTestId(container, 'list-item');
   expect(listItemsAll.length).toBe(4);
 });
+
+it('Переносы в фильтрах работают верно', () => {
+  const { container } = render(<Form />);
+
+  const filterActiveBtn = getByTestId(container, 'btn-active');
+  const filterCompletedBtn = getByTestId(container, 'btn-completed');
+
+  fireEvent.click(filterActiveBtn);
+
+  const listItemsActive = getAllByTestId(container, 'list-item');
+  expect(listItemsActive.length).toBe(3);
+
+  fireEvent.click(filterCompletedBtn);
+
+  const listItemsCompleted = getAllByTestId(container, 'list-item');
+  expect(listItemsCompleted.length).toBe(1);
+
+  fireEvent.click(filterActiveBtn);
+
+  const firstListItemBtn = getByTestId(container, 'list-item-button-0');
+  expect(firstListItemBtn.querySelector('input')?.checked).not.toEqual(true);
+
+  fireEvent.click(firstListItemBtn);
+
+  const listItemsRefreshedActive = getAllByTestId(container, 'list-item');
+  expect(listItemsRefreshedActive.length).toBe(2);
+
+  fireEvent.click(filterCompletedBtn);
+
+  const listItemsRefreshedCompleted = getAllByTestId(container, 'list-item');
+  expect(listItemsRefreshedCompleted.length).toBe(2);
+});
