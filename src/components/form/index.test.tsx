@@ -1,4 +1,4 @@
-import { render, getByTestId, fireEvent } from '@testing-library/react';
+import { render, getByTestId, fireEvent, getAllByTestId } from '@testing-library/react';
 import Form from '.';
 
 it('Счетчик оставшихся задач работает верно', () => {
@@ -16,5 +16,16 @@ it('Счетчик оставшихся задач работает верно',
   expect(counter.querySelector('span')!.textContent).toBe('2 left');
 });
 
-// const li = getAllByTestId('list-item');
-// expect(li.length).toEqual(4);
+it('Кнопка удаления выполненных задач работает верно', () => {
+  const { container } = render(<Form />);
+
+  const clearBtn = getByTestId(container, 'btn-clear');
+
+  const listItems = getAllByTestId(container, 'list-item');
+  expect(listItems.length).toBe(4);
+
+  fireEvent.click(clearBtn);
+
+  const listItemsCleared = getAllByTestId(container, 'list-item');
+  expect(listItemsCleared.length).toBe(3);
+});
