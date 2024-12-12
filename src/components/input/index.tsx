@@ -12,8 +12,9 @@ export default function Input({ addTodo }: { addTodo: (todo: ITodo) => void }): 
     }
   };
   return (
-    <form onSubmit={submitNewToDo}>
+    <form data-testid="form" onSubmit={submitNewToDo}>
       <TextField
+        data-testid="input"
         fullWidth
         value={value}
         onChange={(e) => {
