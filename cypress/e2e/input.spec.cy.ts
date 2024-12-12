@@ -25,4 +25,31 @@ describe('cypress test', () => {
 
     cy.get('li').should('have.length', 2);
   });
+
+  it('проверка работы фильтров', () => {
+    cy.get('li').should('have.length', 4);
+
+    cy.get('[data-testid="btn-active"]').click();
+    cy.get('li').should('have.length', 3);
+
+    cy.get('[data-testid="btn-completed"]').click();
+    cy.get('li').should('have.length', 1);
+
+    cy.get('[data-testid="btn-active"]').click();
+
+    cy.get('ul').within(() => {
+      cy.get('li')
+        .eq(0)
+        .within(() => {
+          cy.get('[data-testid="list-item-button-0"]').click();
+        });
+    });
+
+    cy.get('li').should('have.length', 2);
+
+    cy.get('[data-testid="btn-completed"]').click();
+    cy.get('li').should('have.length', 2);
+
+    cy.get('[data-testid="counter"]').contains('span', '2 left');
+  });
 });
